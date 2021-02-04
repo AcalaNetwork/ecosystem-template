@@ -15,12 +15,11 @@ pub mod module {
 
 	#[pallet::config]
 	pub trait Config: frame_system::Config {
-		type Event: From<Event<Self>> + Into<<Self as frame_system::Config>::Event>;
+		type Event: From<Event<Self>> + IsType<<Self as frame_system::Config>::Event>;
 		type Currency: Currency<Self::AccountId>;
 	}
 
 	#[pallet::event]
-	#[pallet::generate_deposit(fn deposit_event)]
 	pub enum Event<T: Config> {
 		Dummy(T::AccountId, BalanceOf<T>),
 	}
